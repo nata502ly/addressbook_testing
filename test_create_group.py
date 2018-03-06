@@ -20,8 +20,9 @@ class TestCreateGroup(unittest.TestCase):
         driver.find_element_by_name("user").send_keys("admin")
         driver.find_element_by_name("pass").clear()
         driver.find_element_by_name("pass").send_keys("secret")
-        driver.find_element_by_xpath(u"//input[@value='Войти']").click()
-        driver.find_element_by_link_text(u"Группы").click()
+        driver.find_element_by_css_selector('#LoginForm > input[type="submit"]').click()
+        # Open group page
+        driver.find_element_by_css_selector('#nav > ul > li.admin > a').click()
         driver.find_element_by_name("new").click()
         driver.find_element_by_name("group_name").click()
         driver.find_element_by_name("group_name").clear()
@@ -34,7 +35,7 @@ class TestCreateGroup(unittest.TestCase):
         driver.find_element_by_name("group_footer").send_keys("new footer")
         driver.find_element_by_name("submit").click()
         driver.find_element_by_link_text("group page").click()
-        driver.find_element_by_link_text(u"Выйти").click()
+        driver.find_element_by_css_selector("form[name=logout] > a").click()
 
     def is_element_present(self, how, what):
         try:
