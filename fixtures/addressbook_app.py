@@ -47,6 +47,13 @@ class AddressbookApp:
         # 3. Submit group
         driver.find_element_by_name("submit").click()
 
+    def delete_group(self, number):
+        driver = self.driver
+        checkboxes = driver.find_elements_by_name("selected[]")
+        if not checkboxes[number].is_selected():
+            checkboxes[number].click()
+        driver.find_element_by_name("delete").click()
+
     def is_element_present(self, how, what):
         try:
             self.driver.find_element(by=how, value=what)

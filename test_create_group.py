@@ -12,6 +12,11 @@ class TestCreateGroup(unittest.TestCase):
         self.app.create_group("new name", "new header", "new footer")
         self.app.return_to_group_page()
 
+    def test_delete_first_group(self):
+        self.app.open_group_page()
+        self.app.delete_group(number=0)
+        self.app.return_to_group_page()
+
     def tearDown(self):
         self.app.logout()
         self.app.close()
