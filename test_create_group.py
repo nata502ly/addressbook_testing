@@ -3,8 +3,11 @@ import unittest
 
 
 class TestCreateGroup(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.app = AddressbookApp()
+
     def setUp(self):
-        self.app = AddressbookApp()
         self.app.login(username="admin", password="secret")
 
     def test_create_group(self):
@@ -19,8 +22,10 @@ class TestCreateGroup(unittest.TestCase):
 
     def tearDown(self):
         self.app.logout()
-        self.app.close()
 
+    @classmethod
+    def tearDownClass(cls):
+        cls.app.close()
 
 if __name__ == "__main__":
     unittest.main()
