@@ -2,7 +2,7 @@ import pytest
 from fixtures.addressbook_app import AddressbookApp
 
 
-@pytest.fixture()
+@pytest.fixture(scope="session")
 def app():
     app = AddressbookApp()
     yield app
