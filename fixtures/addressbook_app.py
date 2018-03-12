@@ -18,19 +18,17 @@ class AddressbookApp:
         self.internal_page = InternalPage(self.driver)
 
     def login(self, username, password):
-        driver = self.driver
-        driver.find_element_by_name("user").click()
-        driver.find_element_by_name("user").clear()
-        driver.find_element_by_name("user").send_keys(username)
-        driver.find_element_by_name("pass").clear()
-        driver.find_element_by_name("pass").send_keys(password)
-        driver.find_element_by_css_selector('#LoginForm > input[type="submit"]').click()
+        self.login_page.username_field.clear()
+        self.login_page.username_field.send_keys(username)
+        self.login_page.password_field.clear()
+        self.login_page.password_field.send_keys(password)
+        self.login_page.submit_button.click()
 
     def logout(self):
-        self.driver.find_element_by_css_selector("form[name=logout] > a").click()
+        self.internal_page.logout_button.click()
 
     def open_group_page(self):
-        self.driver.find_element_by_css_selector('#nav > ul > li.admin > a').click()
+        self.internal_page.group_menu.click()
 
     def return_to_group_page(self):
         self.driver.find_element_by_link_text("group page").click()
@@ -58,13 +56,6 @@ class AddressbookApp:
         if not checkboxes[number].is_selected():
             checkboxes[number].click()
         driver.find_element_by_name("delete").click()
-
-    def is_element_present(self, how, what):
-        try:
-            self.driver.find_element(by=how, value=what)
-        except NoSuchElementException as e:
-            return False
-        return True
 
     def close(self):
         self.driver.quit()
