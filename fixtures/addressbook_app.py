@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
+from pages.login_page import LoginPage
+from pages.internal_page import InternalPage
 
 
 class AddressbookApp:
@@ -11,6 +13,9 @@ class AddressbookApp:
         self.driver.implicitly_wait(5)
         self.base_url = base_url
         self.driver.get(self.base_url)
+        # Pages:
+        self.login_page = LoginPage(self.driver)
+        self.internal_page = InternalPage(self.driver)
 
     def login(self, username, password):
         driver = self.driver

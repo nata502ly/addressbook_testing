@@ -20,6 +20,10 @@ class InternalPage(BasePage):
     # TODO: all other menus elements
 
     @property
+    def logged_user(self):
+        return self.driver.find_element_by_css_selector('form[name="logout"] > b')
+
+    @property
     def logout_button(self):
         return self.driver.find_element_by_css_selector("form[name=logout] > a")
 
