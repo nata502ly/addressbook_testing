@@ -1,11 +1,8 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import NoSuchElementException
 from pages.login_page import LoginPage
 from pages.internal_page import InternalPage
 from pages.groups_pages.groups_view_page import GroupViewPage
+from pages.message_page import MessagePage
 
 
 class AddressbookApp:
@@ -18,6 +15,7 @@ class AddressbookApp:
         self.login_page = LoginPage(self.driver)
         self.internal_page = InternalPage(self.driver)
         self.group_view_page = GroupViewPage(self.driver)
+        self.message_page = MessagePage(self.driver)
 
     def login(self, username, password):
         self.login_page.username_field.clear()
