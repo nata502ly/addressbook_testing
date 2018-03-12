@@ -6,10 +6,8 @@ group_list = [Group("new name", "new header", "new footer"),
               Group("@$#%&", "^$#%^&&", "%^&&*(&"),
               Group("Кирилица", "РПСлтдлфыв", "Два слова")]
 
-test_labels = ["latins", "numbers", "spec symbols", "cyrillic"]
 
-
-@pytest.mark.parametrize("group", group_list, ids=test_labels)
+@pytest.mark.parametrize("group", group_list, ids=[str(group) for group in group_list])
 def test_create_group(app, init_login, group):
     app.open_group_page()
     app.create_group(group)
