@@ -33,20 +33,20 @@ class AddressbookApp:
     def return_to_group_page(self):
         self.driver.find_element_by_link_text("group page").click()
 
-    def create_group(self, group_name, group_header, group_footer):
+    def create_group(self, group):
         driver = self.driver
         # 1. Initialization group create
         driver.find_element_by_name("new").click()
         # 2. Fill form
         driver.find_element_by_name("group_name").click()
         driver.find_element_by_name("group_name").clear()
-        driver.find_element_by_name("group_name").send_keys(group_name)
+        driver.find_element_by_name("group_name").send_keys(group.name)
         driver.find_element_by_name("group_header").click()
         driver.find_element_by_name("group_header").clear()
-        driver.find_element_by_name("group_header").send_keys(group_header)
+        driver.find_element_by_name("group_header").send_keys(group.header)
         driver.find_element_by_name("group_footer").click()
         driver.find_element_by_name("group_footer").clear()
-        driver.find_element_by_name("group_footer").send_keys(group_footer)
+        driver.find_element_by_name("group_footer").send_keys(group.footer)
         # 3. Submit group
         driver.find_element_by_name("submit").click()
 
