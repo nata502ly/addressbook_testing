@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from pages.login_page import LoginPage
 from pages.internal_page import InternalPage
+from pages.groups_pages.groups_view_page import GroupViewPage
 
 
 class AddressbookApp:
@@ -16,6 +17,7 @@ class AddressbookApp:
         # Pages:
         self.login_page = LoginPage(self.driver)
         self.internal_page = InternalPage(self.driver)
+        self.group_view_page = GroupViewPage(self.driver)
 
     def login(self, username, password):
         self.login_page.username_field.clear()
@@ -51,11 +53,10 @@ class AddressbookApp:
         driver.find_element_by_name("submit").click()
 
     def delete_group(self, number):
-        driver = self.driver
-        checkboxes = driver.find_elements_by_name("selected[]")
+        checkboxes = self.group_view_page.group_checkboxes
         if not checkboxes[number].is_selected():
             checkboxes[number].click()
-        driver.find_element_by_name("delete").click()
+        self.group_view_page.delete_group_button_upper.click()
 
     def close(self):
         self.driver.quit()
