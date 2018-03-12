@@ -28,4 +28,4 @@ class InternalPage(BasePage):
         return self.driver.find_element_by_css_selector("form[name=logout] > a")
 
     def is_this_page(self):
-        return self.is_element_present(By.CSS_SELECTOR, "#nav > ul")
+        return self.is_element_visible(By.CSS_SELECTOR, "#nav > ul")

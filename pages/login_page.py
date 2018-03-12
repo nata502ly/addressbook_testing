@@ -16,7 +16,7 @@ class LoginPage(BasePage):
         return self.driver.find_element_by_css_selector('#LoginForm > input[type="submit"]')
 
     def is_this_page(self):
-        return self.is_element_present(By.ID, "LoginForm")
+        return self.is_element_visible(By.ID, "LoginForm")
 
 
 if __name__ == "__main__":
