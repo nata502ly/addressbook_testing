@@ -1,13 +1,3 @@
-import pytest
-from models.group import Group
-
-group_list = [Group("new name", "new header", "new footer"),
-              Group("132214", "12423", "1234325"),
-              Group("@$#%&", "^$#%^&&", "%^&&*(&"),
-              Group("Кирилица", "РПСлтдлфыв", "Два слова")]
-
-
-@pytest.mark.parametrize("group", group_list, ids=[str(group) for group in group_list])
 def test_create_group(app, init_login, group):
     app.open_group_page()
     app.create_group(group)
