@@ -6,9 +6,9 @@ from fixtures.addressbook_app import AddressbookApp
 from models.group import Group
 
 
-@pytest.fixture(scope="session")
-def app():
-    app = AddressbookApp()
+@pytest.fixture()
+def app(selenium):
+    app = AddressbookApp(selenium)
     yield app
     app.close()
 

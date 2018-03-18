@@ -6,8 +6,8 @@ from pages.message_page import MessagePage
 
 
 class AddressbookApp:
-    def __init__(self, base_url="http://localhost/addressbook"):
-        self.driver = webdriver.Chrome()
+    def __init__(self, driver, base_url="http://localhost/addressbook"):
+        self.driver = driver
         self.driver.implicitly_wait(5)
         self.base_url = base_url
         self.driver.get(self.base_url)
