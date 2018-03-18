@@ -3,6 +3,7 @@ import json
 import random
 import string
 from fixtures.addressbook_app import AddressbookApp
+from fixtures.addressbook_db import AddressbookDB
 from models.group import Group
 
 
@@ -18,6 +19,13 @@ def app(selenium, config):
     app = AddressbookApp(selenium, base_url=config["web"]["base_url"])
     yield app
     app.close()
+
+
+@pytest.fixture(scope="session")
+def db(config):
+    db = AddressbookDB(**config["db"])
+    yield db
+    db.close()
 
 
 @pytest.fixture()
