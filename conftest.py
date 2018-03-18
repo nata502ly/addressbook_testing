@@ -6,16 +6,23 @@ from fixtures.addressbook_app import AddressbookApp
 from models.group import Group
 
 
+@pytest.fixture(scope="session")
+def config():
+    with open("config.json") as f:
+        result = json.load(f)
+    return result
+
+
 @pytest.fixture()
-def app(selenium):
-    app = AddressbookApp(selenium)
+def app(selenium, config):
+    app = AddressbookApp(selenium, base_url=config["web"]["base_url"])
     yield app
     app.close()
 
 
 @pytest.fixture()
-def init_login(app):
-    app.login(username="admin", password="secret")
+def init_login(app, config):
+    app.login(username=config["web"]["username"], password=config["web"]["password"])
     yield
     app.logout()
 
