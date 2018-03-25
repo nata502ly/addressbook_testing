@@ -2,6 +2,7 @@ import pytest
 import json
 import random
 import string
+import os.path
 from fixtures.addressbook_app import AddressbookApp
 from fixtures.addressbook_db import AddressbookDB
 from models.group import Group
@@ -9,7 +10,8 @@ from models.group import Group
 
 @pytest.fixture(scope="session")
 def config():
-    with open("config.json") as f:
+    filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
+    with open(filename) as f:
         result = json.load(f)
     return result
 
@@ -44,8 +46,8 @@ def random_string(max_len):
         result += symbol
     return result
 
-
-with open("group_data.json", encoding="utf8") as f:
+filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "group_data.json")
+with open(filename, encoding="utf8") as f:
     group_list = json.load(f)
 
 group_list += [{"name": random_string(25),
