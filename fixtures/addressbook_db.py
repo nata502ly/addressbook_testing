@@ -1,4 +1,5 @@
 import pymysql
+import allure
 
 
 class AddressbookDB:
@@ -7,6 +8,7 @@ class AddressbookDB:
                                           charset='utf8mb4',
                                           cursorclass=pymysql.cursors.DictCursor)
 
+    @allure.step("GIVEN a group list")
     def get_groups(self):
         with self.connection.cursor() as cursor:
             sql = """SELECT group_id, group_name, group_header, group_footer 

@@ -1,3 +1,8 @@
+import pytest
+
+
+@pytest.mark.smoke
+@pytest.mark.regression
 def test_positive_login(app):
     username = "admin"
     assert app.login_page.is_this_page()

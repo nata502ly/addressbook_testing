@@ -1,4 +1,4 @@
-from selenium import webdriver
+import allure
 from pages.login_page import LoginPage
 from pages.internal_page import InternalPage
 from pages.groups_pages.groups_view_page import GroupViewPage
@@ -17,6 +17,7 @@ class AddressbookApp:
         self.group_view_page = GroupViewPage(self.driver)
         self.message_page = MessagePage(self.driver)
 
+    @allure.step("I log as {username}")
     def login(self, username, password):
         self.login_page.username_field.clear()
         self.login_page.username_field.send_keys(username)
@@ -24,15 +25,19 @@ class AddressbookApp:
         self.login_page.password_field.send_keys(password)
         self.login_page.submit_button.click()
 
+    @allure.step("I logout")
     def logout(self):
         self.internal_page.logout_button.click()
 
+    @allure.step("WHEN I open a group page")
     def open_group_page(self):
         self.internal_page.group_menu.click()
 
+    @allure.step("WHEN I return to group page")
     def return_to_group_page(self):
         self.driver.find_element_by_link_text("group page").click()
 
+    @allure.step("WHEN I add a new group {1}")
     def create_group(self, group):
         driver = self.driver
         # 1. Initialization group create
@@ -50,6 +55,7 @@ class AddressbookApp:
         # 3. Submit group
         driver.find_element_by_name("submit").click()
 
+    @allure.step("WHEN I delete {number} group")
     def delete_group(self, number):
         checkboxes = self.group_view_page.group_checkboxes
         if not checkboxes[number].is_selected():
