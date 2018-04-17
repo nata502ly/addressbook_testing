@@ -6,3 +6,6 @@ class Group:
 
     def __str__(self):
         return "Group: {}, {}, {}".format(self.name, self.header, self.footer)
+
+    def __repr__(self):
+        return "<Group: {}, {}, {}>".format(self.name, self.header, self.footer)
