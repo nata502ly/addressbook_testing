@@ -6,7 +6,30 @@ import os.path
 from fixtures.addressbook_app import AddressbookApp
 from fixtures.addressbook_db import AddressbookDB
 from models.group import Group
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.microsoft import EdgeDriverManager
+from webdriver_manager.microsoft import IEDriverManager
+from selenium import webdriver
 
+
+def pytest_addoption(parser):
+    parser.addoption("--browser", action="store", default="Chrome")
+
+
+@pytest.fixture()
+def driver(request):
+    option = request.config.getoption("--browser")
+    if option.lower() == "chrome":
+        return webdriver.Chrome(ChromeDriverManager().install())
+    elif option == "firefox":
+        return webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    elif option == "edge":
+        return webdriver.Edge(EdgeDriverManager().install())
+    elif option == "ie":
+        return webdriver.Ie(IEDriverManager().install())
+    else:
+        raise ValueError("Unrecognized browser {}".format(option))
 
 @pytest.fixture(scope="session")
 def config():
@@ -17,9 +40,9 @@ def config():
 
 
 @pytest.fixture()
-def app(selenium, config, request):
+def app(driver, config, request):
     base_url = request.config.getoption("--base-url")
-    app = AddressbookApp(selenium, base_url=base_url)
+    app = AddressbookApp(driver, base_url=base_url)
     yield app
     app.close()
 
