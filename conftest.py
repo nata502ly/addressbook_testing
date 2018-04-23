@@ -17,8 +17,9 @@ def config():
 
 
 @pytest.fixture()
-def app(selenium, config):
-    app = AddressbookApp(selenium, base_url=config["web"]["base_url"])
+def app(selenium, config, request):
+    base_url = request.config.getoption("--base-url")
+    app = AddressbookApp(selenium, base_url=base_url)
     yield app
     app.close()
 
